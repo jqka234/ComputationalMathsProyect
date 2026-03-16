@@ -1,0 +1,42 @@
+clc
+clear
+
+%entidades
+students = 20;
+computers = 10;
+slots = 5;
+
+% tensor
+T = zeros(students,computers,slots);
+
+% disponibilidad
+available = ones(computers,slots);
+
+% numero de solicitudes
+requests = 50;
+
+for i = 1:requests
+    
+    student = randi(students);
+    computer = randi(computers);
+    slot = randi(slots);
+    
+    fprintf("Solicitud: estudiante %d - PC %d - horario %d\n",student,computer,slot)
+    
+    if available(computer,slot) == 1
+        
+        T(student,computer,slot) = 1;
+        available(computer,slot) = 0;
+        disp("Reserva hecha")
+        
+    else
+        
+        disp("Conflicto")
+        
+    end
+    
+end
+
+% combinatoria
+total = students * computers * slots;
+fprintf("\nTotal combinaciones posibles: %d\n",total)
